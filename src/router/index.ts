@@ -12,14 +12,9 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import("../components/home/Index.vue"),
             },
             {
-                path: '/qa', // 默认子路由
-                name: '问答',
-                component: () => import('../components/qa/QaIndex.vue')
-            },
-            {
-                path: '/video',
+                path: '/discovery',
                 name: '视频',
-                component: () => import('../components/Video.vue')
+                component: () => import('../components/discovery/DiscoveryIndex.vue')
             },
             {
                 path: '/my', // 默认子路由
