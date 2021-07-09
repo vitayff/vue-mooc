@@ -1,11 +1,10 @@
 import request from "../utils/request"
-import store from '../store'
 
 /**
  * 用户登录
  */
 export const login = (data: any) => {
-    console.log("loginData",{
+    console.log("loginData", {
         method: 'POST',
         url: '/login',
         data
@@ -15,8 +14,6 @@ export const login = (data: any) => {
         url: '/login',
         data
     })
-
-
 }
 
 /**

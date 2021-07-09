@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory, RouteRecordRaw} from "vue-router";
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -27,6 +27,34 @@ const routes: Array<RouteRecordRaw> = [
         path: '/login',
         name: '登录',
         component: () => import('../components/Login/LoginIndex.vue')
+    },
+    {
+        path: '/joinOne',
+        name: '加入新课程',
+        component: () => import('../components/home/AddOne.vue')
+    },
+    {
+        path: '/course',
+        name: '课程',
+        redirect:'/activity',
+        component: () => import('../components/course/index.vue'),
+        children: [
+            {
+                path: "/activity",
+                name: "活动",
+                component: () => import("../components/course/activity.vue"),
+            },
+            {
+                path: '/resources',
+                name: '资源',
+                component: () => import('../components/course/resources.vue')
+            },
+            {
+                path: '/member', // 默认子路由
+                name: '成员',
+                component: () => import('../components/course/member.vue')
+            },
+        ]
     },
     // {
     //     path: '/',

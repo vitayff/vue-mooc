@@ -6,10 +6,9 @@ import request from '../utils/request'
 /**
  * 获取文章列表
  */
-export const getArticles = (params: any) => {
+export const getArticles = () => {
     return new Promise((resolve, reject) => request({
         method: 'GET',
-        url: '/app/v1_1/articles',
-        params
+        url: '/articles',
     }).then((res) => resolve(res)).catch((err) => reject(err)))
 }

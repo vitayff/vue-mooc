@@ -5,7 +5,7 @@ import router from "../router";
 
 
 const request = axios.create({
-    baseURL: "http://localhost:3000/api/" // 基础路径
+    baseURL: "http://121.43.232.82:3000/api/" // 基础路径
 })
 
 
@@ -27,7 +27,7 @@ request.interceptors.request.use(
     function (config) {
         const user = store.state.user;
         if (user) {
-            config.headers.Authorization = `Bearer ${user.token}`;
+            config.headers.Authorization = `Bearer ${user}`;
         }
         // Do something before request is sent
         return config;
@@ -60,7 +60,7 @@ request.interceptors.response.use(
             const user = store.state.user;
 
             if (!user || !user.refresh_token) {
-                router.push("/login");
+                await router.push("/login");
 
                 // 代码不要往后执行了
                 return;
@@ -90,7 +90,7 @@ request.interceptors.response.use(
             } catch (err) {
                 // 如果获取失败，直接跳转 登录页
                 console.log("请求刷线 token 失败", err);
-                router.push("/login");
+                await router.push("/login");
             }
         }
 
