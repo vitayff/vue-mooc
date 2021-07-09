@@ -8,7 +8,7 @@
       error-text="请求失败，点击重新加载"
   >
     <van-cell-group border inset>
-      <van-cell v-for="ac in activities" :title="ac.title" >
+      <van-cell v-for="ac in activities" :title="ac.title" @click="$router.push('upload')">
         <template #label>
           {{ ac.desc }}
         </template>

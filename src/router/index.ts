@@ -33,6 +33,12 @@ const routes: Array<RouteRecordRaw> = [
         name: '加入新课程',
         component: () => import('../components/home/AddOne.vue')
     },
+
+    {
+        path: '/upload',
+        name: '上传',
+        component: () => import('../components/course/uploadfile.vue')
+    },
     {
         path: '/course',
         name: '课程',

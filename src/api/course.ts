@@ -30,3 +30,12 @@ export const getCourseDetail = (data: any) => {
     }).then((res) => resolve(res)).catch((err) =>
         reject(err)))
 }
+
+export const uploadFile = (data: any) => {
+    return new Promise((resolve, reject) => request({
+        method: 'POST',
+        url: 'upload',
+        data
+    }).then((res) => resolve(res)).catch((err) =>
+        reject(err)))
+}
