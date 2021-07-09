@@ -41,8 +41,8 @@
     </div>
     <!-- /登录按钮 -->
 
-    <van-divider>账号：13611111111 密码：246810</van-divider>
-    <van-divider>如果收不到验证码，请使用万能验证码：246810</van-divider>
+    <van-divider>账号：19857111111 密码：111111</van-divider>
+    <van-divider>如果收不到验证码，请使用万能验证码：111111</van-divider>
 
     <div class="van-checkbox">
       <input type="checkbox" v-model="checked" @click="agree" />
