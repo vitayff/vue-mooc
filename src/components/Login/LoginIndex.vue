@@ -1,35 +1,36 @@
 <template>
   <div class="login-container">
-    <van-nav-bar left-arrow @click-left="$router.back()" title="注册/登录" />
+    <van-nav-bar left-arrow @click-left="$router.back()" title="注册/登录"/>
     <!-- 导航栏 -->
 
     <!-- 表单 -->
     <van-cell-group inset class="a-form">
       <van-field
-        v-model="user.mobile"
-        type="tel"
-        maxlength="11"
-        placeholder="请输入手机号"
-        label="手机号"
-        @change="valid1"
+          v-model="user.mobile"
+          type="tel"
+          maxlength="11"
+          placeholder="请输入手机号"
+          label="手机号"
+          @change="valid1"
       ></van-field>
       <van-field
-        v-model="user.code"
-        type="tel"
-        maxlength="6"
-        label="验证码"
-        placeholder="请输入验证码"
-        ref="code"
-        @change="valid2"
+          v-model="user.code"
+          type="tel"
+          maxlength="6"
+          label="验证码"
+          placeholder="请输入验证码"
+          ref="code"
+          @change="valid2"
       >
         <template #button>
           <van-button
-            slot="button"
-            size="small"
-            :type="bt1 ? 'default' : 'primary'"
-            :disabled="bt1"
-            @click="onSendSms"
-          >{{ sendcode }}</van-button>
+              slot="button"
+              size="small"
+              :type="bt1 ? 'default' : 'primary'"
+              :disabled="bt1"
+              @click="onSendSms"
+          >{{ sendcode }}
+          </van-button>
         </template>
       </van-field>
     </van-cell-group>
@@ -41,11 +42,11 @@
     </div>
     <!-- /登录按钮 -->
 
-    <van-divider>账号：19857111111 密码：111111</van-divider>
-    <van-divider>如果收不到验证码，请使用万能验证码：111111</van-divider>
+    <van-divider>学生账号：19857111111 密码：111111</van-divider>
+    <van-divider>教师账号：15711111111 密码：222222</van-divider>
 
     <div class="van-checkbox">
-      <input type="checkbox" v-model="checked" @click="agree" />
+      <input type="checkbox" v-model="checked" @click="agree"/>
       <label>
         我已阅读并同意
         <span>《用户协议》</span>和
@@ -55,16 +56,16 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { Toast } from "vant";
-import { ref } from "vue";
-import { login, sendSms } from '../../api/user'
+<script setup>
+import {Toast} from "vant";
+import {ref} from "vue";
+import {login, sendSms} from '../../api/user'
 import store from "../../store";
 import router from "../../router";
 
 const checked = ref(false)
 const code = ref(null)
-const user = ref({ mobile: '', code: '' })
+const user = ref({mobile: '', code: ''})
 const bt1 = ref(true)
 const bt2 = ref(true)
 const sendcode = ref('发送验证码')
@@ -84,7 +85,7 @@ const valid1 = () => {
   } else {
     phoneOk.value = false
     bt1.value = true
-    if (user.value.mobile.length == 11)
+    if (user.value.mobile.length === 11)
       Toast('请输入有效手机号');
   }
 }
@@ -143,18 +144,19 @@ const onLogin = async () => {
   }
 
   const load = Toast.loading(
-    {
-      duration: 0,
-      forbidClick: true,
-      message: '登录中',
-    }
+      {
+        duration: 0,
+        forbidClick: true,
+        message: '登录中',
+      }
   )
 
   try {
-    const { data } = await login({ username: user.value.mobile, password: user.value.code })
+    const {data} = await login({username: user.value.mobile, password: user.value.code})
     console.log(data)
     store.commit('setUser', data.token)
     store.commit('setNickname', data.nickname)
+    store.commit('setFlag', data.flag)
     Toast.success('登录成功')
     router.back()
   } catch (err) {

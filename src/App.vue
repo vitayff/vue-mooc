@@ -1,12 +1,24 @@
 <template>
-  <router-view v-slot="{ Component }">
+  <router-view v-if="isRouterAlive" v-slot="{ Component }">
     <keep-alive>
       <component :is="Component"/>
     </keep-alive>
   </router-view>
 </template>
 
-<script setup lang="ts"></script>
+<script setup>
+import {nextTick, provide, ref} from "vue";
+
+const isRouterAlive = ref(true)
+
+const reload = () => {
+  isRouterAlive.value = false
+  nextTick(() => {
+    isRouterAlive.value = true
+  })
+}
+provide('reload', reload)
+</script>
 
 <style>
 #app {
@@ -15,6 +27,6 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  height: 100%;
+  height: 100vh;
 }
 </style>

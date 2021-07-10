@@ -4,7 +4,7 @@
       left-arrow
       @click-left="$router.push('/')"
   />
-  <van-tabs v-model:active="active">
+  <van-tabs v-model:active="active" key="course">
     <van-tab title="资源" to="/resources"/>
     <van-tab title="活动" to="/activity"/>
     <van-tab title="成员" to="/member"/>
@@ -20,7 +20,6 @@
 import {onUpdated, ref} from "vue";
 import {useRoute} from "vue-router";
 import router from "../../router";
-
 const active = ref(1)
 const rr = ['/resources', '/activity', '/member']
 router.push(rr[1])

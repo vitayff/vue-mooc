@@ -1,6 +1,14 @@
 <template>
-  <van-nav-bar left-arrow @click-left="$router.back()" title="上传资源"/>
+  <van-nav-bar left-arrow @click-left="goback" title="作答"/>
   <div class="upload-file">
+    <van-cell-group border inset>
+      <van-cell :title="act.title">
+        <template #label>
+          {{ act.desc }}
+        </template>
+        <template #value>100经验</template>
+      </van-cell>
+    </van-cell-group>
     <van-field placeholder="请输入资源描述" v-model="desc" label="资源描述"/>
     <van-field name="uploader" label="文件上传">
       <template #input>
@@ -8,15 +16,17 @@
       </template>
     </van-field>
     <van-loading type="spinner" color="#1989fa" v-show="show"/>
-    <van-button :disabled="disabled" plain type="primary" size="normal" @click="onUpload">上传课程资源</van-button>
+    <van-button :disabled="disabled" plain type="primary" size="normal" @click="onUpload">提交</van-button>
   </div>
 </template>
 
 <script setup>
-import {ref} from "vue";
-import {addRes} from '../../api/teacher'
+import {inject, onBeforeMount, ref} from "vue";
+import {uploadFile} from '../../api/course'
 import {Toast} from "vant";
 import store from '../../store'
+import {getActivity} from '../../api/activity'
+import router from "../../router";
 
 const show = ref(false)
 const desc = ref('')
@@ -28,7 +38,13 @@ const afterRead = async (file) => {
   params.append('file', file.file)
   hasPic.value = true
 };
-
+const act = ref(null)
+const getAct = async () => {
+  const {data} = await getActivity({aid: store.state.activity})
+  act.value = data
+  console.log(act.value)
+}
+const reload = inject('reload')
 const onUpload = async () => {
 
   if (!hasPic.value) {
@@ -36,15 +52,11 @@ const onUpload = async () => {
     return
   }
 
-
   params.append('desc', desc.value)
-  params.append('courseId', store.state.cID)
-
-
-
+  params.append('aid', store.state.activity)
   try {
     show.value = true
-    await addRes(params)
+    await uploadFile(params)
     Toast.success('上传成功')
     show.value = false
   } catch (e) {
@@ -54,12 +66,22 @@ const onUpload = async () => {
   } finally {
     disabled.value = true
   }
-
 }
+const goback = () => {
+  reload()
+  router.back()
+}
+onBeforeMount(() => {
+  act.value = {
+    title: '',
+    desc: ''
+  }
+  getAct()
+})
 </script>
 
 <style scoped>
 .upload-file {
-  margin-top: 10vh;
+  margin-top: 7vh;
 }
 </style>

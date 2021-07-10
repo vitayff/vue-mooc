@@ -32,6 +32,7 @@ export const getCourseDetail = (data: any) => {
 }
 
 export const uploadFile = (data: any) => {
+    console.log(data)
     return new Promise((resolve, reject) => request({
         method: 'POST',
         url: 'upload',

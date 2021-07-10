@@ -1,16 +1,25 @@
 <template>
-  <div class="my-container" :key="$route.path">
-    <van-tabs v-model:active="active">
+  <div class="my-container">
+    <van-tabs v-model:active="active" key="index">
       <template #nav-right>
         <van-icon @click="show=!show" style="height: 44px; width: 66px;margin-top: 7px" size="30" name="plus"/>
       </template>
-      <van-tab title="我创建的">
-        <van-empty description="还没有创建的班课"/>
-        <!--        <course-list channel="0"/>-->
-      </van-tab>
-      <van-tab title="我加入的">
-        <course-list channel="1"/>
-      </van-tab>
+      <div v-if="flag()">
+        <van-tab title="我创建的">
+          <van-empty description="还没有创建的班课"/>
+        </van-tab>
+        <van-tab title="我加入的">
+          <course-list/>
+        </van-tab>
+      </div>
+      <div v-else>
+        <van-tab title="我创建的">
+          <course-list/>
+        </van-tab>
+        <van-tab title="我加入的">
+          <van-empty description="还没有加入的班课"/>
+        </van-tab>
+      </div>
     </van-tabs>
 
     <van-popup
@@ -18,27 +27,36 @@
         position="bottom"
         :style="{ height: '30%' }"
     >
-      <van-button color="#7232dd" plain size="large">创建课程</van-button>
-      <van-button color="#7232dd" plain size="large" @click="$router.push('joinOne')">使用课程号加入课程</van-button>
+      <van-button color="#7232dd" plain size="large" @click="gotoWhere">创建课程</van-button>
+      <van-button color="#7232dd" plain size="large" @click="gotoWhere">使用课程号加入课程</van-button>
     </van-popup>
   </div>
 </template>
 
 <script setup>
 import CourseList from './CourseList.vue'
-import {ref, watchEffect} from "vue";
-import {Dialog} from "vant";
+import {onMounted, ref} from "vue";
 import store from "../../store";
-import {addcourse} from "../../api/course";
+import router from "../../router";
 
 const show = ref(false)
 const active = ref(1)
-const channels = [
-  {name: "我创建的", id: 0},
-  {name: "我加入的", id: 1},
-]
-
-
+const flag = () => {
+  return store.state.flag === 1
+}
+const gotoWhere = () => {
+  show.value=false
+  if (flag())
+    router.push('joinOne')
+  else
+    router.push('createOne')
+}
+onMounted(() => {
+  if (flag())
+    active.value = 1
+  else
+    active.value = 0
+})
 </script>
 
 <style lang="scss" scoped>

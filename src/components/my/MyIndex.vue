@@ -1,15 +1,15 @@
 <template>
   <div class="my-container">
-    <van-nav-bar title="我的" />
+    <van-nav-bar title="我的"/>
     <div class="my-head">
       <van-nav-bar class="my-pic">
         <template #left>
-          <van-image round width="4rem" height="4rem" src="https://img.yzcdn.cn/vant/cat.jpeg" />
+          <van-image round width="4rem" height="4rem" src="https://img.yzcdn.cn/vant/cat.jpeg"/>
           <h3>&nbsp;{{ nickname }}</h3>
         </template>
         <template #right>
           编辑资料
-          <van-icon name="arrow" size="28" />
+          <van-icon name="arrow" size="28"/>
         </template>
       </van-nav-bar>
 
@@ -40,40 +40,40 @@
       <van-grid :border="false" :column-num="3">
         <van-grid-item text="我的空间">
           <template #icon>
-            <van-icon class="pic1" name="src/assets/my/room.png" size="40" />
+            <van-icon class="pic1" name="src/assets/my/room.png" size="40"/>
           </template>
         </van-grid-item>
         <van-grid-item text="我的收藏">
           <template #icon>
-            <van-icon class="pic1" name="src/assets/my/fav.png" size="40" />
+            <van-icon class="pic1" name="src/assets/my/fav.png" size="40"/>
           </template>
         </van-grid-item>
         <van-grid-item text="心意卡片">
           <template #icon>
-            <van-icon class="pic1" name="src/assets/my/gift.png" size="40" />
+            <van-icon class="pic1" name="src/assets/my/gift.png" size="40"/>
           </template>
         </van-grid-item>
       </van-grid>
 
       <van-nav-bar class="body-part2" left-text="我关注的话题">
         <template #right>
-          <van-icon name="arrow" size="28" />
+          <van-icon name="arrow" size="28"/>
         </template>
       </van-nav-bar>
       <van-grid :border="false" :column-num="3">
         <van-grid-item text="C语言">
           <template #icon>
-            <van-icon name="description" size="40" />
+            <van-icon name="description" size="40"/>
           </template>
         </van-grid-item>
         <van-grid-item text="C#程序设计">
           <template #icon>
-            <van-icon name="description" size="40" />
+            <van-icon name="description" size="40"/>
           </template>
         </van-grid-item>
         <van-grid-item text="汇编语言">
           <template #icon>
-            <van-icon name="description" size="40" />
+            <van-icon name="description" size="40"/>
           </template>
         </van-grid-item>
       </van-grid>
@@ -81,12 +81,12 @@
     <div class="my-footer">
       <van-nav-bar left-text="设置">
         <template #right>
-          <van-icon name="arrow" size="28" />
+          <van-icon name="arrow" size="28"/>
         </template>
       </van-nav-bar>
       <van-nav-bar left-text="退出登录" @click="logout">
         <template #right>
-          <van-icon name="arrow" size="28" />
+          <van-icon name="arrow" size="28"/>
         </template>
       </van-nav-bar>
     </div>
@@ -95,19 +95,21 @@
 
 <script setup>
 import store from '../../store'
-import { ref } from "vue";
-import { Dialog } from "vant";
+import {inject, ref} from "vue";
+import {Dialog} from "vant";
 
+const reload = inject('reload')
 const nickname = ref(store.state.uName)
 const logout = () => {
   Dialog.confirm({
     title: '退出提示',
     message: '确认退出吗?'
   }).then(
-    () => {
-      store.commit('setUser', null)
-      console.log("退出登录")
-    }
+      () => {
+        store.commit('setUser', null)
+        console.log("退出登录")
+        reload()
+      }
   ).catch(() => {
     console.log("取消操作")
   })
@@ -208,10 +210,10 @@ const logout = () => {
   justify-content: center;
   flex-direction: column;
   background: linear-gradient(
-    to left top,
-    #11c0ec,
-    rgba(255, 0, 81, 0.77),
-    transparent
+          to left top,
+          #11c0ec,
+          rgba(255, 0, 81, 0.77),
+          transparent
   );
 
   .login-pic {

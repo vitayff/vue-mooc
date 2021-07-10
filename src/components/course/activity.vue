@@ -8,10 +8,7 @@
       error-text="请求失败，点击重新加载"
   >
     <van-cell-group border inset>
-      <van-cell v-for="ac in activities" :title="ac.title" @click="$router.push('upload')">
-        <template #label>
-          {{ ac.desc }}
-        </template>
+      <van-cell v-for="ac in activities" :title="ac.title" @click="setAid(ac._id)">
         <template #value>
           {{ isEnd(ac.endTime) ? '进行中' : '已结束' }}
           <br/>
@@ -27,11 +24,16 @@ import {getCourseDetail} from '../../api/course'
 import store from '../../store'
 import {ref} from "vue";
 import dayjs from "dayjs";
+import router from "../../router";
 
 const finished = ref(false)
 const loading = ref(false)
 const err = ref(false)
 const activities = ref([])
+const setAid=(id)=>{
+  store.commit('setActivity',id)
+  router.push('answer')
+}
 const onLoad = async () => {
   try {
     const {data} = await getCourseDetail({

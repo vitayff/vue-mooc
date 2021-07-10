@@ -20,12 +20,12 @@ import {ref} from "vue";
 import {getCourses} from "../../api/course";
 import CourseItem from "./CourseItem.vue";
 
-const props = defineProps({
-  channel: {
-    type: String,
-    required: true
-  }
-})
+// const props = defineProps({
+//   channel: {
+//     type: String,
+//     required: true
+//   }
+// })
 
 // const {channel} = toRefs(props) 复杂对象无法结构
 const courses = ref([]),

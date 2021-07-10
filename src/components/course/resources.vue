@@ -15,6 +15,9 @@
         </template>
       </van-cell>
     </van-cell-group>
+    <div v-if="!flag()">
+      <van-button round type="primary" @click="$router.push('upload')">添加新文件</van-button>
+    </div>
   </van-list>
 </template>
 <script setup>
@@ -22,6 +25,11 @@ import {getCourseDetail} from '../../api/course'
 import store from '../../store'
 import {ref} from "vue";
 import dayjs from "dayjs";
+
+const flag = () => {
+  return store.state.flag === 1
+}
+
 
 const finished = ref(false)
 const loading = ref(false)

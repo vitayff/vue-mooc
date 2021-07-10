@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import {createRouter, createWebHistory, RouteRecordRaw} from "vue-router";
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -33,7 +33,16 @@ const routes: Array<RouteRecordRaw> = [
         name: '加入新课程',
         component: () => import('../components/home/AddOne.vue')
     },
-
+    {
+        path: '/createOne',
+        name: '创建新课程',
+        component: () => import('../components/home/createOne.vue')
+    },
+    {
+        path: '/answer',
+        name: '回答',
+        component: () => import('../components/course/SubmitAnswer.vue')
+    },
     {
         path: '/upload',
         name: '上传',
@@ -42,7 +51,7 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/course',
         name: '课程',
-        redirect:'/activity',
+        redirect: '/activity',
         component: () => import('../components/course/index.vue'),
         children: [
             {
