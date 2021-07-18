@@ -1,9 +1,11 @@
 <template>
-  <router-view v-if="isRouterAlive" v-slot="{ Component }">
-    <keep-alive>
-      <component :is="Component"/>
-    </keep-alive>
-  </router-view>
+
+  <router-view/>
+<!--  <router-view v-if="isRouterAlive" v-slot="{ Component }">-->
+<!--    <keep-alive>-->
+<!--      <component :is="Component"/>-->
+<!--    </keep-alive>-->
+<!--  </router-view>-->
 </template>
 
 <script setup>

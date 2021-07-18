@@ -2,11 +2,7 @@
 
   <div class="layout-container">
     <!-- 子路由出口 -->
-        <router-view v-slot="{ Component }">
-          <keep-alive>
-            <component :is="Component"/>
-          </keep-alive>
-        </router-view>
+        <router-view/>
 
 <!--    <router-view/>-->
     <!-- /子路由出口 -->
