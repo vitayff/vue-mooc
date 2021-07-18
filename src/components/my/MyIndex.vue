@@ -98,7 +98,7 @@ import store from '../../store'
 import {inject, ref} from "vue";
 import {Dialog} from "vant";
 
-const reload = inject('reload')
+// const reload = inject('reload')
 const nickname = ref(store.state.uName)
 const logout = () => {
   Dialog.confirm({
@@ -108,7 +108,7 @@ const logout = () => {
       () => {
         store.commit('setUser', null)
         console.log("退出登录")
-        reload()
+        // reload()
       }
   ).catch(() => {
     console.log("取消操作")
