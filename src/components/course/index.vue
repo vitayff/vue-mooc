@@ -1,4 +1,4 @@
-<template>
+<template key="course">
   <van-nav-bar
       left-text="返回"
       left-arrow

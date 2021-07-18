@@ -1,4 +1,4 @@
-<template>
+<template key="activity">
   <van-list
       v-model:loading="loading"
       v-model:error="err"
@@ -8,7 +8,7 @@
       error-text="请求失败，点击重新加载"
   >
     <van-cell-group border inset>
-      <van-cell v-for="ac in activities" :title="ac.title" @click="setAid(ac._id)">
+      <van-cell v-for="ac in activities" :title="ac.title" @click="setAid(ac._id,isEnd(ac.endTime))">
         <template #value>
           {{ isEnd(ac.endTime) ? '进行中' : '已结束' }}
           <br/>
@@ -30,8 +30,9 @@ const finished = ref(false)
 const loading = ref(false)
 const err = ref(false)
 const activities = ref([])
-const setAid=(id)=>{
+const setAid=(id,isable)=>{
   store.commit('setActivity',id)
+  store.commit('setActabled',!isable)
   router.push('answer')
 }
 const onLoad = async () => {

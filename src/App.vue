@@ -1,14 +1,16 @@
 <template>
 
   <router-view/>
-<!--  <router-view v-if="isRouterAlive" v-slot="{ Component }">-->
-<!--    <keep-alive>-->
-<!--      <component :is="Component"/>-->
-<!--    </keep-alive>-->
-<!--  </router-view>-->
+  <!--  <router-view v-if="isRouterAlive" v-slot="{ Component }">-->
+  <!--    <keep-alive>-->
+  <!--      <component :is="Component"/>-->
+  <!--    </keep-alive>-->
+  <!--  </router-view>-->
 </template>
 
 <script setup>
+import mitt from "mitt";
+
 import {nextTick, provide, ref} from "vue";
 
 const isRouterAlive = ref(true)
@@ -19,6 +21,8 @@ const reload = () => {
     isRouterAlive.value = true
   })
 }
+const bus = new mitt()
+provide('bus', bus)
 provide('reload', reload)
 </script>
 

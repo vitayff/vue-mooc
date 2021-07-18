@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory, RouteRecordRaw} from "vue-router";
+import {createRouter, createWebHistory, onBeforeRouteUpdate, RouteRecordRaw} from "vue-router";
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -51,7 +51,6 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/course',
         name: '课程',
-        redirect: '/activity',
         component: () => import('../components/course/index.vue'),
         children: [
             {

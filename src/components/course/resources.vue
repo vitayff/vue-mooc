@@ -1,4 +1,4 @@
-<template>
+<template key="res">
   <van-list
       v-model:loading="loading"
       v-model:error="err"

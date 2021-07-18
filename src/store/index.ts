@@ -7,6 +7,7 @@ const U_NAME = 'USER_NICK_NAME'
 const CID = 'COURSE_ID'
 const FLAG = 'USER_ROLE'
 const ACT = 'ACTIVITY_ID'
+const IS_ABLE='ACTIVITY_ABLED'
 export default createStore({
     state: {
         // user: JSON.parse(<string>window.localStorage.getItem('TOUTIAO_USER')),
@@ -14,7 +15,8 @@ export default createStore({
         uName: getItem(U_NAME),
         cID: getItem(CID),
         flag: getItem(FLAG),
-        activity: getItem(ACT)
+        activity: getItem(ACT),
+        isactable:getItem(IS_ABLE)
     },
     mutations: {
         setUser(state, data) {
@@ -37,8 +39,11 @@ export default createStore({
         setActivity(state, data) {
             state.activity = data
             setItem(ACT, state.activity)
+        },
+        setActabled(state,data){
+            state.isactable=data
+            setItem(IS_ABLE,state.isactable)
         }
-
     },
     actions: {},
     modules: {},

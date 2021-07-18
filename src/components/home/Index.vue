@@ -1,4 +1,4 @@
-<template>
+<template key="home">
   <div class="my-container">
     <van-tabs v-model:active="active" key="index">
       <template #nav-right>

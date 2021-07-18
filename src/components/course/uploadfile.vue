@@ -1,4 +1,4 @@
-<template>
+<template key="upload">
   <van-nav-bar left-arrow @click-left="$router.back()" title="上传资源"/>
   <div class="upload-file">
     <van-field placeholder="请输入资源描述" v-model="desc" label="资源描述"/>
